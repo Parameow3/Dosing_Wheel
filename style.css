@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* To stack wheel and slider vertically */
+    background-color: black;
+    
+}
+
+.wheel-container {
+    width: 300px;
+    height: 300px;
+    background-image: url("number.svg");
+    position: relative;
+    margin-bottom: 30px; /* Space between wheel and slider */
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    background: url("wheel.svg");
+    position: relative;
+    transform: rotate(0deg);
+    transition: transform 0.1s ease-out;
+}
+
+.controls-container {
+    display: flex;
+    align-items: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+
+.slider-container {
+    width: 300px; /* Same width as the wheel for alignment */
+    display: flex;
+    justify-content: center;
+}
+
+.input-container {
+    margin-top: 20px;
+}
+
+
+input[type=range] {
+    -webkit-appearance: none;
+    border: 1px solid white;
+    width: 200px;
+    left: 0;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #fada86;
+    margin-top: -6px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
