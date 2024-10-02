@@ -1,3 +1,4 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,64 +7,76 @@
 
 body, html {
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* To stack wheel and slider vertically */
+    flex-direction: column; /* Stack wheel and controls vertically */
     background-color: black;
-    
+    overflow: hidden; /* Prevent scrolling */
 }
 
+/* Wheel Container - Fixed in the center */
 .wheel-container {
-    width: 300px;
-    height: 300px;
-    background-image: url("number.svg");
+    width: 60vw; /* Responsive sizing */
+    height: 60vw; /* Maintain proportional height */
     position: relative;
-    margin-bottom: 30px; /* Space between wheel and slider */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Add some space between the wheel and controls */
 }
 
 .wheel {
+    width: 88%;
+    height: 88%;
+    background: url("wheel.svg") no-repeat center center;
+    background-size: contain;
+    position: absolute;
+}
+
+.number-rotating {
     width: 100%;
     height: 100%;
-    background: url("wheel.svg");
-    position: relative;
+    background: url("number.svg") no-repeat center center;
+    background-size: contain;
+    position: absolute;
     transform: rotate(0deg);
     transition: transform 0.1s ease-out;
 }
 
+/* Control Container */
 .controls-container {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Ensure space between the elements */
+    flex-direction: column; /* Stack button and slider vertically */
+    width: 100%;
+    max-width: 300px; /* Limit max width */
 }
 
-button {
+/* Spin Button */
+.input-container button {
+    margin-bottom: 15px;
     padding: 10px 20px;
-    font-size: 18px;
-    margin: 0 10px;
+    font-size: 16px;
+    background-color: #fada86;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-
-.slider-container {
-    width: 300px; /* Same width as the wheel for alignment */
-    display: flex;
-    justify-content: center;
-}
-
-.input-container {
-    margin-top: 20px;
-}
-
-
+/* Input Range Style */
 input[type=range] {
     -webkit-appearance: none;
     border: 1px solid white;
-    width: 200px;
-    left: 0;
+    width: 100%; /* Make range width flexible */
+    max-width: 300px;
+    margin: 10px 0; /* Space around the slider */
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    width: 200px;
+    width: 100%;
     height: 5px;
     background: #ddd;
     border: none;
@@ -82,9 +95,46 @@ input[type=range]::-webkit-slider-thumb {
     position: relative;
     z-index: 1;
 }
+
 input[type=range]:focus {
     outline: none;
 }
+
 input[type=range]:focus::-webkit-slider-runnable-track {
     background: #ccc;
+}
+
+/* Numeric Input */
+input[type=number] {
+    width: 60px;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid white;
+    text-align: center;
+    color: black;
+    background-color: #fada86;
+}
+
+/* Media Queries for Smaller Devices */
+@media (max-width: 768px) {
+    .wheel-container {
+        width: 80vw; /* Increase size on mobile */
+        height: 80vw;
+    }
+
+    .controls-container {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wheel-container {
+        width: 90vw; /* Further increase size for smaller screens */
+        height: 90vw;
+    }
+
+    .controls-container {
+        max-width: 200px;
+    }
 }

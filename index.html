@@ -8,21 +8,15 @@
 </head>
 <body>
 <div class="wheel-container">
-    <div class="wheel">
-    </div>
+    <div class="number-rotating"></div> <!-- Numbers rotating behind -->
+    <div class="wheel"></div> <!-- Wheel remains static on top -->
 </div>
 
-<!-- Slider to control wheel rotation -->
+<!-- Control Options -->
 <div class="controls-container">
-        <div class="range-slider-coin">
-            <input type="range" id="rotationSlider" min="0" max="360" value="0" step="1">
-        </div>
-
-</div>
-
-<!-- Input field for entering value directly -->
-<div class="input-container">
-    <input type="number" id="rotationInput" min="0" max="360" value="0" step="4.5">
+    <div class="slider-container">
+        <input type="range" id="rotationSlider" min="0" max="360" value="0" step="1">
+    </div>
 </div>
 
 <script src="script.js"></script>
