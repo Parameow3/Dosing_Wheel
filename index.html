@@ -3,22 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dosing Wheel with Numbers and Slider</title>
+    <title>Dosing Wheel with Pain Levels</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="wheel-container">
-    <div class="number-rotating"></div> <!-- Numbers rotating behind -->
-    <div class="wheel"></div> <!-- Wheel remains static on top -->
+    <div class="number-rotating"></div> <!-- Rotating numbers behind the static wheel -->
+    <div class="wheel"></div> <!-- Static wheel on top -->
 </div>
 
 <!-- Control Options -->
 <div class="controls-container">
+    <!-- Pain Level Selector (Dropdown) -->
+    <div class="pain-level-controls">
+        <label for="painLevelSelect">Select Pain Level:</label>
+        <select id="painLevelSelect">
+            <option value="0">Level 0</option>
+            <option value="1">Level 1</option>
+            <option value="2">Level 2</option>
+            <option value="3">Level 3</option>
+            <option value="4">Level 4</option>
+            <option value="5">Level 5</option>
+        </select>
+    </div>
+
+    <!-- Rotation Slider -->
     <div class="slider-container">
-        <input type="range" id="rotationSlider" min="0" max="360" value="0" step="1">
+        <label for="rotationSlider">Control Rotation:</label>
+        <input type="range" id="rotationSlider" min="0" max="100" value="50" step="1">
     </div>
 </div>
 
+<!-- Include the JavaScript -->
 <script src="script.js"></script>
+
+<script>
+    // Function to handle pain level dropdown selection
+    const painLevelSelect = document.getElementById('painLevelSelect');
+    painLevelSelect.addEventListener('change', function() {
+        const selectedLevel = parseInt(this.value); // Get the selected pain level
+        updateSliderForPainLevel(selectedLevel); // Update slider and wheel accordingly
+    });
+
+    // Initialize to pain level 0 on page load
+    updateSliderForPainLevel(0);
+</script>
+
 </body>
 </html>

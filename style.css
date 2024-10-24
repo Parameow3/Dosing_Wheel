@@ -34,6 +34,16 @@ body, html {
     background-size: contain;
     position: absolute;
 }
+/*.number-rotating {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background: url("number.svg") no-repeat center center;*/
+/*    background-size: contain;*/
+/*    position: absolute;*/
+/*    transform: rotate(0deg);*/
+/*    transition: transform 0.2s linear; !* Smoother and faster transition *!*/
+/*}*/
+
 
 .number-rotating {
     width: 100%;
@@ -44,6 +54,8 @@ body, html {
     transform: rotate(0deg);
     transition: transform 0.1s ease-out;
 }
+
+
 
 /* Control Container */
 .controls-container {
