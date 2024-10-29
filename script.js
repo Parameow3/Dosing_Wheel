@@ -55,3 +55,7 @@ rotationSlider.addEventListener('input', function() {
 
 // Initialize to pain level 0 on page load
 updateSliderForPainLevel(0);
+
+
+// These slider range component was used in my other component:
+// https://github.com/yairEO/color-picker

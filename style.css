@@ -56,9 +56,73 @@ body, html {
     transition: transform 0.1s ease-out;
 }
 
+/* Input Range Style */
+/* Input Range Style */
+input[type=range] {
+    -webkit-appearance: none;
+    border: 1px solid white;
+    width: 100%; /* Make range width flexible */
+    max-width: 300px;
+    margin: 10px 0; /* Space around the slider */
+}
+
+input[type="range"]::-moz-range-progress {
+    background-color: green;
+    height: 6px;
+}
+
+/*track run*/
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+/*THUMB*/
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #fada86;
+    margin-top: -6px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #fada86;
+    margin-top: -6px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+
+
 /*<!-- most basic, used for Knobs demo -->*/
 .range-slider {
-    margin-bottom: 21px;
+    -webkit-appearance: none;
+    width: 100%; /* Make range width flexible */
+    max-width: 300px;
+    /* Space around the slider */
+    margin: 10px 0 21px;
     display: flex;
     flex-direction: column;
     --primary-color: #0366d6;
@@ -93,10 +157,10 @@ body, html {
 
     --thumb-shadow-hover: var(--thumb-shadow);
 
-    --ticks-thickness: 1px;
-    --ticks-height: 5px;
+    --ticks-thickness: 2px;
+    --ticks-height: 6px;
     --ticks-gap: var(--ticks-height, 0);
-    --ticks-color: silver;
+    --ticks-color: black;
 
     --step: 1;
     --ticks-count: calc((var(--max) - var(--min)) / var(--step));
@@ -202,7 +266,6 @@ body, html {
                 var(--track-height) / 2
         );
         height: calc(var(--track-height));
-        background: var(--progress-background, #eee);
         pointer-events: none;
         z-index: -1;
         border-radius: var(--progress-radius);
@@ -249,7 +312,6 @@ body, html {
         }
     }
 }
-
 
 
 
