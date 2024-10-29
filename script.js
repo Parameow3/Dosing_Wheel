@@ -8,6 +8,14 @@ const painLevelDegrees = {
     5: { min: 212, max: 268 }
 };
 
+// Update displayed values
+document.getElementById('painLevelSelect').addEventListener('input', function() {
+    document.getElementById('painLevelOutput').value = this.value;
+});
+document.getElementById('rotationSlider').addEventListener('input', function() {
+    document.getElementById('rotationOutput').value = this.value;
+});
+
 // Cache the rotating number element
 const rotatingNumber = document.querySelector('.number-rotating');
 const rotationSlider = document.getElementById('rotationSlider');
