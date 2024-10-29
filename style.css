@@ -389,38 +389,6 @@ body, html {
     gap: 1%;
     padding: 3px;
 }
-/* Input Range Style */
-input[type=range] {
-    -webkit-appearance: none;
-    border: 1px solid white;
-    width: 100%; /* Make range width flexible */
-    max-width: 300px;
-    margin: 10px 0; /* Space around the slider */
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 5px;
-    background: #ddd;
-    border: none;
-    border-radius: 3px;
-}
-
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: none;
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    background: #fada86;
-    margin-top: -6px;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-}
-
-
-
 
 /* Media Queries for Smaller Devices */
 @media (max-width: 768px) {
