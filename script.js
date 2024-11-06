@@ -3,7 +3,7 @@ const painLevelDegrees = {
     0: { min: 152, max: 208 },
     1: { min: 92.5, max: 147.62 },
     2: { min: 32.35, max: 87.77 },
-    3: { min: 332.2, max: 27.75 },
+    3: { min: 332.2, max: 387.75 },
     4: { min: 272.32, max: 327.62 },
     5: { min: 212, max: 268 }
 };
