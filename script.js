@@ -8,6 +8,16 @@ const painLevelDegrees = {
     5: { min: 212, max: 268 }
 };
 
+// List of predefined angles
+const angles = [
+    32, 37, 42, 46, 51, 55, 60, 65, 69, 74, 79, 83, 88, 93, 97, 101,
+    106, 111, 115, 120, 125, 129, 134, 139, 143, 148, 152, 157, 162, 167,
+    171, 176, 181, 185, 190, 194, 199, 203, 208, 212, 217, 222, 226, 231,
+    236, 240, 245, 250, 254, 259, 263, 268, 272, 277, 282, 286, 291, 295,
+    300, 305, 310, 314, 319, 323, 328, 332, 337, 342, 346, 351, 356, 360,
+    365, 370, 374, 378, 383, 388
+];
+
 // Update displayed values
 document.getElementById('painLevelSelect').addEventListener('input', function() {
     document.getElementById('painLevelOutput').value = this.value;
@@ -20,27 +30,40 @@ document.getElementById('rotationSlider').addEventListener('input', function() {
 const rotatingNumber = document.querySelector('.number-rotating');
 const rotationSlider = document.getElementById('rotationSlider');
 
-// Function to set rotation for the selected pain level
+// Function to get angles within the range for the selected pain level
+function getAnglesForPainLevel(painLevel) {
+    const range = painLevelDegrees[painLevel];
+    return angles.filter(angle => angle >= range.min && angle <= range.max);
+}
+
+// Function to find the closest angle in a specific range
+function getClosestAngle(value, angleRange) {
+    return angleRange.reduce((a, b) => Math.abs(b - value) < Math.abs(a - value) ? b : a);
+}
+
+// Modified function to set rotation based on the nearest angle in the pain level range
 function setRotationForPainLevel(painLevel, sliderValue) {
     const level = painLevelDegrees[painLevel];
-
-    // Calculate rotation within the pain level's degree range
     const rotationRange = level.max - level.min;
     const targetDegree = level.min + (rotationRange * sliderValue / 100);
 
-    // Apply the calculated rotation to the element
-    rotatingNumber.style.transform = `rotate(${targetDegree}deg)`;
+    // Find the nearest angle within the pain level's range
+    const angleRange = getAnglesForPainLevel(painLevel);
+    const closestAngle = getClosestAngle(targetDegree, angleRange);
+
+    // Apply the calculated rotation (snapped to nearest angle) to the element
+    rotatingNumber.style.transform = `rotate(${closestAngle}deg)`;
 }
 
 // Function to update slider based on selected pain level
 function updateSliderForPainLevel(painLevel) {
-    // Reset the slider to the middle (50%) when switching levels
+    // Reset the slider to 0 when switching levels
     rotationSlider.value = 0;
 
     // Store the selected pain level in a data attribute for future reference
     rotationSlider.dataset.painLevel = painLevel;
 
-    // Immediately set rotation to reflect the middle of the new pain level's range
+    // Immediately set rotation to reflect the first angle in the range
     setRotationForPainLevel(painLevel, 0);
 }
 
@@ -55,7 +78,3 @@ rotationSlider.addEventListener('input', function() {
 
 // Initialize to pain level 0 on page load
 updateSliderForPainLevel(0);
-
-
-// These slider range component was used in my other component:
-// https://github.com/yairEO/color-picker

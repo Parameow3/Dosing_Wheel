@@ -293,6 +293,12 @@ input[type=range]::-moz-range-thumb {
 
         &:hover {
             --thumb-shadow: var(--thumb-shadow-hover);
+            & + output {
+                --value-background: var(--value-background-hover);
+                --y-offset: -5px;
+                color: var(--value-active-color);
+                box-shadow: 0 0 0 3px var(--value-background);
+            }
         }
 
         &:active {
@@ -300,7 +306,33 @@ input[type=range]::-moz-range-thumb {
             cursor: grabbing;
             z-index: 2;
         }
+
+        & + output {
+            --flip: -1;
+            --x-offset: calc(var(--completed-b) * -1%);
+            --pos: calc(
+                    ((var(--value) - var(--min)) / (var(--max) - var(--min))) * 100%
+            );
+
+            pointer-events: none;
+            position: absolute;
+            z-index: 5;
+            background: var(--value-background);
+            border-radius: 10px;
+            padding: 2px 4px;
+            left: var(--pos);
+            transform: translate(
+                    var(--x-offset),
+                    calc(
+                            150% * var(--flip) - (var(--y-offset, 0px) + var(--value-offset-y)) *
+                            var(--flip)
+                    )
+            );
+            transition: all 0.12s ease-out, left 0s;
+
+        }
     }
+
 }
 
 
