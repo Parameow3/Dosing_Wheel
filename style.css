@@ -50,15 +50,12 @@ body, html {
 /* Input Range Style */
 input[type=range] {
     -webkit-appearance: none;
-    border: 1px solid white;
-    width: 100%; /* Make range width flexible */
-    max-width: 300px;
-    margin: 10px 0; /* Space around the slider */
-}
-
-input[type="range"]::-moz-range-progress {
-    background-color: green;
+    appearance: none;
+    width: 100%;
     height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
 /*track run*/
@@ -84,7 +81,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 18px;
     width: 18px;
     border-radius: 50%;
-    background: #fada86;
+    background: #7FC6A8;
     margin-top: -6px;
     cursor: pointer;
     position: relative;
@@ -97,247 +94,85 @@ input[type=range]::-moz-range-thumb {
     height: 18px;
     width: 18px;
     border-radius: 50%;
-    background: #fada86;
+    background: #7FC6A8;
     margin-top: -6px;
     cursor: pointer;
     position: relative;
     z-index: 1;
 }
 
-
-
-/*<!-- most basic, used for Knobs demo -->*/
+/* Scoped Styles for Range Slider */
 .range-slider {
-    -webkit-appearance: none;
-    width: 100%; /* Make range width flexible */
-    max-width: 300px;
-    /* Space around the slider */
-    margin: 10px 0 21px;
     display: flex;
     flex-direction: column;
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px 0;
     --primary-color: #0366d6;
-    --show-min-max: block; /* Default display setting */
-    --at-edge: 1; /* Default opacity scaling */
-    --tickEvery: 1; /* Define --tickEvery to avoid undefined variable error */
-    --before: -1; /* Default value */
-
-
-    --value-offset-y: var(--ticks-gap);
-    --value-active-color: white;
-    --value-background: transparent;
-    --value-background-hover: var(--primary-color);
-    --value-font: 700 12px/1 Arial, sans-serif;
-
-    --fill-color: var(--primary-color);
-    --progress-background: #eee;
-    --progress-radius: 20px;
-    --track-height: calc(var(--thumb-size) / 2);
-
-    --min-max-font: 12px Arial, sans-serif;
-    --min-max-opacity: 0.5;
-    --min-max-x-offset: 10%;
-
     --thumb-size: 22px;
     --thumb-color: white;
-    --thumb-shadow: 0 0 3px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.5) inset,
-    0 0 0 99px var(--thumb-color) inset;
-
-    --thumb-shadow-active: 0 0 0 calc(var(--thumb-size) / 4) inset var(--thumb-color),
-    0 0 0 99px var(--primary-color) inset, 0 0 3px rgba(0, 0, 0, 0.4);
-
-    --thumb-shadow-hover: var(--thumb-shadow);
-
-    --ticks-thickness: 2px;
-    --ticks-height: 6px;
-    --ticks-gap: var(--ticks-height, 0);
-    --ticks-color: black;
-
-    --step: 1;
-    --ticks-count: calc((var(--max) - var(--min)) / var(--step));
-    --maxTicksAllowed: 30;
-    --too-many-ticks: min(1, max(var(--ticks-count) - var(--maxTicksAllowed), 0));
-    --x-step: max(var(--step), var(--too-many-ticks) * (var(--max) - var(--min)));
-    --tickInterval: calc(100% / ((var(--max) - var(--min)) / var(--step) * var(--tickEvery, 1)));
-    --tickIntervalPerc: calc(
-            (100% - var(--thumb-size)) / ((var(--max) - var(--min)) / var(--x-step)) *
-            var(--tickEvery, 1)
-    );
-
-    --value-a: clamp(var(--min), var(--value, 0), var(--max));
-    --value-b: var(--value, 0);
-    --text-value-a: var(--text-value, "");
-
-    --completed-a: calc(
-            (var(--value-a) - var(--min)) / (var(--max) - var(--min)) * 100%
-    );
-    --completed-b: calc(
-            (var(--value-b) - var(--min)) / (var(--max) - var(--min)) * 100%
-    );
-    --ca: min(var(--completed-a), var(--completed-b));
-    --cb: max(var(--completed-a), var(--completed-b));
-
-    --thumbs-too-close: clamp(
-            -1,
-            1000 * (min(1, max(var(--cb) - var(--ca) - 5, -1)) + 0.001),
-            1
-    );
-    --thumb-close-to-min: min(1, max(var(--ca) - 2, 0));
-    --thumb-close-to-max: min(1, max(98 - var(--cb), 0));
-
-    height: max(var(--track-height), var(--thumb-size));
-    background: linear-gradient(
-            to right,
-            var(--ticks-color) var(--ticks-thickness),
-            transparent 1px
-    )
-    repeat-x;
-    background-size: var(--tickIntervalPerc) var(--ticks-height);
-    background-position-x: calc(var(--thumb-size) / 2 - var(--ticks-thickness) / 2);
-    background-position-y: var(--flip-y, bottom);
-
-    padding-bottom: var(--flip-y, var(--ticks-gap));
-    padding-top: calc(var(--flip-y) * var(--ticks-gap));
-
-    position: relative;
-    z-index: 1;
-
-    &[data-ticks-position="top"] {
-        --flip-y: 1;
-    }
-
-    &::before,
-    &::after {
-        --offset: calc(var(--thumb-size) / 2);
-        content: counter(x);
-        display: var(--show-min-max, block);
-        font: var(--min-max-font);
-        position: absolute;
-        bottom: var(--flip-y, -2.5ch);
-        top: calc(-2.5ch * var(--flip-y));
-        opacity: clamp(0, var(--at-edge), var(--min-max-opacity));
-        transform: translateX(
-                calc(var(--min-max-x-offset) * var(--before, -1) * -1)
-        )
-        scale(var(--at-edge));
-        pointer-events: none;
-    }
-
-    /* Replace &__values with .range-slider__values */
-    .range-slider__values {
-        position: relative;
-        top: 50%;
-        line-height: 0;
-        text-align: justify;
-        width: 100%;
-        pointer-events: none;
-        margin: 0 auto;
-        z-index: 5;
-
-        &::after {
-            content: "";
-            width: 100%;
-            display: inline-block;
-            height: 0;
-            background: red;
-        }
-    }
-
-    /* Replace &__progress with .range-slider__progress */
-    .range-slider__progress {
-        --start-end: calc(var(--thumb-size) / 2);
-        --clip-end: calc(100% - (var(--cb)) * 1%);
-        --clip-start: calc(var(--ca) * 1%);
-        --clip: inset(-20px var(--clip-end) -20px var(--clip-start));
-        position: absolute;
-        left: var(--start-end);
-        right: var(--start-end);
-        top: calc(
-                var(--ticks-gap) * var(--flip-y, 0) + var(--thumb-size) / 2 -
-                var(--track-height) / 2
-        );
-        height: calc(var(--track-height));
-        pointer-events: none;
-        z-index: -1;
-        border-radius: var(--progress-radius);
-    }
-
-    & > input {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        width: 100%;
-        height: var(--thumb-size);
-        margin: 0;
-        position: absolute;
-        left: 0;
-        top: calc(
-                50% - max(var(--track-height), var(--thumb-size)) / 2 +
-                calc(var(--ticks-gap) / 2 * var(--flip-y, -1))
-        );
-        cursor: grab;
-        outline: none;
-        background: none;
-
-        &::-webkit-slider-thumb,
-        &::-moz-range-thumb,
-        &::-ms-thumb {
-            height: var(--thumb-size);
-            width: var(--thumb-size);
-            border-radius: 50%;
-            background: var(--thumb-color);
-            box-shadow: var(--thumb-shadow);
-            border: none;
-            pointer-events: auto;
-            transition: 0.1s;
-        }
-
-        &:hover {
-            --thumb-shadow: var(--thumb-shadow-hover);
-            & + output {
-                --value-background: var(--value-background-hover);
-                --y-offset: -5px;
-                color: var(--value-active-color);
-                box-shadow: 0 0 0 3px var(--value-background);
-            }
-        }
-
-        &:active {
-            --thumb-shadow: var(--thumb-shadow-active);
-            cursor: grabbing;
-            z-index: 2;
-        }
-
-        & + output {
-            --flip: -1;
-            --x-offset: calc(var(--completed-b) * -1%);
-            --pos: calc(
-                    ((var(--value) - var(--min)) / (var(--max) - var(--min))) * 100%
-            );
-
-            pointer-events: none;
-            position: absolute;
-            z-index: 5;
-            background: var(--value-background);
-            border-radius: 10px;
-            padding: 2px 4px;
-            left: var(--pos);
-            transform: translate(
-                    var(--x-offset),
-                    calc(
-                            150% * var(--flip) - (var(--y-offset, 0px) + var(--value-offset-y)) *
-                            var(--flip)
-                    )
-            );
-            transition: all 0.12s ease-out, left 0s;
-
-        }
-    }
-
+    --fill-color: var(--primary-color);
+    --track-height: 6px;
+    --progress-radius: 20px;
+    --value: 0;
 }
 
+.range-slider > input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    height: var(--thumb-size);
+    background: none;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+}
+
+.range-slider__progress {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: var(--track-height);
+    background-color: var(--fill-color);
+    border-radius: var(--progress-radius);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.range-slider__label {
+    position: absolute;
+    top: -35px;
+    background-color: #7FC6A8;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    white-space: nowrap;
+}
+
+.range-slider > input:hover + .range-slider__label {
+    visibility: visible;
+    opacity: 1;
+}
+
+.range-slider > input {
+    position: relative;
+}
+
+.range-slider > input + .range-slider__label {
+    left: calc(var(--value) * 1% - 15px);
+}
+v
 
 
-/* Control Container */
+
+    /* Control Container */
 .controls-container {
     display: flex;
     align-items: center;

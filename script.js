@@ -76,5 +76,26 @@ rotationSlider.addEventListener('input', function() {
     setRotationForPainLevel(selectedLevel, sliderValue);
 });
 
+document.querySelectorAll('.range-slider input[type="range"]').forEach((slider) => {
+    slider.addEventListener('input', (e) => {
+        const label = e.target.nextElementSibling; // Select the label
+        label.textContent = e.target.value; // Update label content
+        const percent = ((e.target.value - e.target.min) / (e.target.max - e.target.min)) * 100;
+        label.style.left = `calc(${percent}% - ${label.offsetWidth / 2}px)`; // Center the label dynamically
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('painLevelSelect');
+    const label = document.getElementById('painLevelLabel');
+
+    slider.addEventListener('input', (event) => {
+        const value = event.target.value;
+        label.textContent = `Pain Level: ${value}`;
+    });
+});
+
+
+
 // Initialize to pain level 0 on page load
 updateSliderForPainLevel(0);

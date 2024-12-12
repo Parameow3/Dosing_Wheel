@@ -16,13 +16,13 @@
 <!-- Control Options -->
 <div class="controls-container">
     <!-- Pain Level Slider -->
-    <label for="painLevelSelect">Pain Level</label>
+    <label id="painLevelLabel" for="painLevelSelect">Pain Level: 0</label>
     <div class="range-slider" style="--min:0; --max:5; --step:1; --value:0; --text-value:'0';">
         <input type="range" id="painLevelSelect" min="0" max="5" step="1" value="0"
                                                     oninput="this.parentNode.style.setProperty('--value', this.value);
                this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))">
-        <output></output>
-        <div class='range-slider__progress'></div>
+        <span class="range-slider__label">0</span>
+        <div class="range-slider__progress"></div>
     </div>
 
     <!-- Rotation Slider -->
