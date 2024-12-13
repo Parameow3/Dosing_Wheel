@@ -17,6 +17,42 @@ body, html {
     gap: 1%;
 }
 
+.pain-level-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 350px; /* Increased width for numbers alignment */
+}
+
+.pain-level-numbers {
+    display: flex;
+    justify-content: space-between;
+    width: 125%; /* Increase width for better spacing */
+    font-size: 14px;
+    margin-bottom: -5px; /* Space between numbers and slider */
+    padding: 0 10px; /* Add padding for better alignment */
+}
+
+.pain-level-numbers span {
+    text-align: center;
+    flex: 1; /* Spread numbers evenly */
+    font-weight: bold;
+    max-width: calc(100% / 6); /* Prevent overlapping if resized */
+    padding: 3px; /* Add padding for better visual effect */
+    border-radius: 4px; /* Round corners for the selected background */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.pain-level-numbers span.selected {
+    margin: 3px;
+    background-color: #7FC6A8; /* Highlight selected number */
+    color: #000000; /* Optional: Make text color white for better contrast */
+}
+
+
+
 /* Wheel Container - Fixed in the center */
 .wheel-container {
     width: 60vw; /* Responsive sizing */
@@ -35,7 +71,6 @@ body, html {
     background-size: contain;
     position: absolute;
 }
-
 
 .number-rotating {
     width: 100%;
@@ -142,13 +177,37 @@ input[type=range]::-moz-range-thumb {
     z-index: 1;
 }
 
+
+.range-slider-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.range-slider-ticks {
+    position: absolute;
+    bottom: 10px; /* Adjust the vertical alignment below the slider */
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none; /* Ensure no interference with the slider */
+    z-index: 0; /* Place below the slider */
+}
+
+.range-slider-ticks div {
+    width: 1px;
+    height: 10px; /* Length of the tick marks */
+    background-color: black;
+}
+
+
 .range-slider__label {
     position: absolute;
-    top: -35px;
+    top: -36px;
     background-color: #7FC6A8;
-    padding: 4px 8px;
+    padding: 2px 8px;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 14px;
     color: #000;
     visibility: hidden;
     opacity: 0;
@@ -168,11 +227,8 @@ input[type=range]::-moz-range-thumb {
 .range-slider > input + .range-slider__label {
     left: calc(var(--value) * 1% - 15px);
 }
-v
 
-
-
-    /* Control Container */
+/* Control Container */
 .controls-container {
     display: flex;
     align-items: center;

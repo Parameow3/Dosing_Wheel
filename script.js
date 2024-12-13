@@ -86,15 +86,42 @@ document.querySelectorAll('.range-slider input[type="range"]').forEach((slider) 
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.getElementById('painLevelSelect');
-    const label = document.getElementById('painLevelLabel');
+    const painLevelSlider = document.getElementById('painLevelSelect');
+    const painLevelLabel = document.getElementById('painLevelLabel');
+    const painLevelNumbers = document.querySelectorAll('.pain-level-numbers span');
 
-    slider.addEventListener('input', (event) => {
+    function updateSelectedPainLevel(value) {
+        // Remove the 'selected' class from all numbers
+        painLevelNumbers.forEach((number, index) => {
+            number.classList.toggle('selected', index === parseInt(value));
+        });
+    }
+
+    // Reset pain level slider to 0 on page load
+    painLevelSlider.value = 0;
+    painLevelLabel.textContent = `Pain Level: 0`;
+    updateSelectedPainLevel(0);
+
+    painLevelSlider.addEventListener('input', (event) => {
         const value = event.target.value;
-        label.textContent = `Pain Level: ${value}`;
+        painLevelLabel.textContent = `Pain Level: ${value}`;
+        updateSliderForPainLevel(value);
+        updateSelectedPainLevel(value);
     });
+
+    // Initialize to pain level 0
+    updateSliderForPainLevel(0);
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const ticksContainer = document.querySelector('.range-slider-ticks');
+    const painLevels = 6; // Number of pain levels (0-5)
+
+    for (let i = 0; i < painLevels; i++) {
+        const tick = document.createElement('div');
+        ticksContainer.appendChild(tick);
+    }
+});
 
 
 // Initialize to pain level 0 on page load
