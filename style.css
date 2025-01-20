@@ -24,6 +24,7 @@ body, html {
     position: relative;
     width: 100%;
     max-width: 350px; /* Increased width for numbers alignment */
+    margin-bottom: 18px;
 }
 
 .pain-level-numbers {
@@ -238,6 +239,7 @@ input[type=range]::-moz-range-thumb {
     max-width: 300px; /* Limit max width */
     gap: 1%;
     padding: 3px;
+    margin-bottom: 18px;
 }
 
 /* Media Queries for Smaller Devices */
